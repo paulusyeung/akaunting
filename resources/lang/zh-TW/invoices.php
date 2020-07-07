@@ -2,8 +2,8 @@
 
 return [
 
-    'invoice_number'        => '訂單號碼',
-    'invoice_date'          => '訂單日期',
+    'invoice_number'        => '發票號碼',
+    'invoice_date'          => '發票日期',
     'total_price'           => '總價',
     'due_date'              => '到期日',
     'order_number'          => '訂單編號',
