@@ -150,8 +150,10 @@ return [
          *
          * Used if no suitable fonts can be found. This must exist in the font folder.
          * @var string
+         * 
+         * 2020.07.07 paulus: 中文字要用 ChironSansHKTT
          */
-        "default_font" => "DejaVu Sans, sans-serif",
+        "default_font" => "ChironSansHKTT, DejaVu Sans, sans-serif",
 
         /**
          * Image DPI setting

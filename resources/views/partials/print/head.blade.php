@@ -16,7 +16,10 @@
 
     <style type="text/css">
         * {
-            font-family: DejaVu Sans, sans-serif !important;
+            /**
+             * 2020.07.07 paulus: 中文字要用 ChironSansHKTT
+             */
+            font-family: ChironSansHKTT, DejaVu Sans, sans-serif !important;
         }
     </style>
 
