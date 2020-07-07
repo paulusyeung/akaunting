@@ -148,7 +148,7 @@
                     @if ($invoice->notes)
                         <br>
                         <strong>{{ trans_choice('general.notes', 2) }}</strong><br><br>
-                        {{ $invoice->notes }}
+                        {!! nl2br($invoice->notes) !!}
                     @endif
                 @stack('notes_input_end')
             </div>
