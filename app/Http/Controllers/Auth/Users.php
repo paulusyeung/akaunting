@@ -170,7 +170,17 @@ class Users extends Controller
         $response = $this->ajaxDispatch(new UpdateUser($user, $request));
 
         if ($response['success']) {
-            $response['redirect'] = route('users.index');
+            /**
+             * 2020.07.17 paulus:
+             * 如果沒有 Read.Auth.Users 權限的用戶 edit 自己的 Profile 後 Save，
+             * akaunting 照舊 redirect 去 'users.index' 咁樣會 fail，我改為 redirect 去 'users.edit'。
+             */
+            if (user()->cannot('read-auth-users') && ($user->id == user()->id)) {
+                $response['redirect'] = route('users.edit', $user->id);
+            } else {
+                $response['redirect'] = route('users.index');
+            }
+
 
             $message = trans('messages.success.updated', ['type' => $user->name]);
 
