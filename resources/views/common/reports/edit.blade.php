@@ -37,6 +37,13 @@
                             ) }}
                         @elseif ($type == 'textareaGroup')
                             {{ Form::$type($field['name'], $field['title']) }}
+                        @elseif ($type == 'dateGroup')
+                            {{ Form::$type($field['name'], $field['title'], $field['icon'], array_merge([
+                                   'data-field' => 'settings',
+                               ],
+                               $field['attributes']),
+                               isset($class->model->settings->{$field['name']}) ? $class->model->settings->{$field['name']}: null
+                           ) }}
                         @elseif ($type == 'selectGroup')
                             {{ Form::$type($field['name'], $field['title'], $field['icon'], $field['values'], $report->settings->{$field['name']}, array_merge([
                                     'data-field' => 'settings'
@@ -50,7 +57,7 @@
                                 $field['attributes'])
                             ) }}
                         @elseif ($type == 'checkboxGroup')
-                            {{ Form::$type($field['name'], $field['title'], $field['items'], $report->settings->{$field['name']}, $field['id'], array_merge([
+                            {{ Form::$type($field['name'], $field['title'], $field['items'], $report->settings->{$field['name']}, $field['id'], $report->settings->{$field['name']}, array_merge([
                                     'data-field' => 'settings'
                                 ],
                                 $field['attributes'])

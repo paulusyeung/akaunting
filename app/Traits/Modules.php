@@ -59,7 +59,7 @@ trait Modules
         return $item;
     }
 
-    public function getDocumentation($alias)
+    public function getDocumentation($alias, $data = [])
     {
         $key = 'apps.' . $alias . '.docs.' . $this->getDataKey($data);
 
@@ -460,7 +460,6 @@ trait Modules
     {
         $module = module($alias);
         $name = $module->getName();
-        $category = $module->get('category');
         $version = $module->get('version');
 
         $company_id = session('company_id');
@@ -483,7 +482,6 @@ trait Modules
             'message' => null,
             'data' => [
                 'name' => $name,
-                'category' => $category,
                 'version' => $version,
             ],
         ];
@@ -513,7 +511,6 @@ trait Modules
             'message' => null,
             'data' => [
                 'name' => $module->getName(),
-                'category' => $module->get('category'),
                 'version' => $module->get('version'),
             ],
         ];
@@ -543,7 +540,6 @@ trait Modules
             'message' => null,
             'data' => [
                 'name' => $module->getName(),
-                'category' => $module->get('category'),
                 'version' => $module->get('version'),
             ],
         ];
@@ -608,7 +604,7 @@ trait Modules
 
         $data = [];
 
-        if (!$notifications = static::getResponse('GET', 'apps/notifications')) {
+        if (!$notifications = static::getResponseData('GET', 'apps/notifications')) {
             return $data;
         }
 

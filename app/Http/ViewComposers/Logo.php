@@ -32,14 +32,11 @@ class Logo
             $path = base_path('public/img/company.png');
         }
 
-        $width = $height = setting('invoice.logo_size', 128);
+        $image = Image::cache(function($image) use ($path) {
+            $width = $height = setting('invoice.logo_size', 128);
 
-        /**
-         * 2020.07.07 paulus: 改個 logo image，用 image 嘅 size 做 width/ height
-         */
-        list($width, $height, $type, $attr) = getimagesize($path);
-
-        $image = Image::make($path)->resize($width, $height)->encode()->getEncoded();
+            $image->make($path)->resize($width, $height)->encode();
+        });
 
         if (empty($image)) {
             return $logo;

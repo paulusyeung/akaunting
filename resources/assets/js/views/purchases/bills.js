@@ -64,6 +64,7 @@ const app = new Vue({
             let items = [];
             let item_backup = this.form.item_backup[0];
             let currency_code = this.form.currency_code;
+            let currency = this.currency;
 
             this.edit.status = true;
 
@@ -73,11 +74,11 @@ const app = new Vue({
                     currency: currency_code,
                     item_id: item.item_id,
                     name: item.name,
-                    price: (item.price).toFixed(2),
+                    price: (item.price).toFixed(currency.precision),
                     quantity: item.quantity,
                     tax_id: item.tax_id,
                     discount: item.discount_rate,
-                    total: (item.total).toFixed(2)
+                    total: (item.total).toFixed(currency.precision)
                 });
             });
 
@@ -176,10 +177,11 @@ const app = new Vue({
                                     case 'fixed':
                                         item_tax_total += tax.rate * item.quantity;
                                         break;
+                                    case 'withholding':
+                                        item_tax_total += 0 - item_discounted_total * (tax.rate / 100);
+                                        break;
                                     default:
-                                        let item_tax_amount = (item_discounted_total / 100) * tax.rate;
-
-                                        item_tax_total += item_tax_amount;
+                                        item_tax_total += item_discounted_total * (tax.rate / 100);
                                         break;
                                 }
                             }
@@ -287,10 +289,10 @@ const app = new Vue({
 
             this.form.items[index].item_id = item.id;
             this.form.items[index].name = item.name;
-            this.form.items[index].price = (item.purchase_price).toFixed(2);
+            this.form.items[index].price = (item.purchase_price).toFixed(this.currency.precision);
             this.form.items[index].quantity = 1;
             this.form.items[index].tax_id = tax_id;
-            this.form.items[index].total = (item.purchase_price).toFixed(2);
+            this.form.items[index].total = (item.purchase_price).toFixed(this.currency.precision);
         },
 
         // remove bill item row => row_id = index
