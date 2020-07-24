@@ -35,6 +35,11 @@ class Logo
         $image = Image::cache(function($image) use ($path) {
             $width = $height = setting('invoice.logo_size', 128);
 
+            /**
+             * 2020.07.07 paulus: 改個 logo image，用 image 嘅 size 做 width/ height
+             */
+            list($width, $height, $type, $attr) = getimagesize($path);
+
             $image->make($path)->resize($width, $height)->encode();
         });
 
