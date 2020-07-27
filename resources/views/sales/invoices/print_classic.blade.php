@@ -199,7 +199,7 @@
         <div class="row mt-1">
             <div class="col-100">
                 <div class="text company">
-                    <strong>{!! $invoice->footer !!}</strong>
+                    <strong>{!! nl2br($invoice->footer) !!}</strong>
                 </div>
             </div>
         </div>
