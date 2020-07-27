@@ -23245,7 +23245,7 @@ textarea[resize="horizontal"] {
 .el-table thead th {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  font-size: 0.65rem;
+  font-size: 0.8125rem;   /* 0.65rem 中文字太細  */
   text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 1px solid #e9ecef;
