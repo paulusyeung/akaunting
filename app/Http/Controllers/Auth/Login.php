@@ -69,7 +69,10 @@ class Login extends Controller
         }
 
         // Check if is customer
+        /** 2020.07.29 paulus: v2.0.19 唔 work，改番上次 commit 嘅
         if ($user->can('read-client-portal')) {
+         */
+        if ($user->contact) {
             $path = session('url.intended', 'portal');
 
             // Path must start with 'portal' prefix
