@@ -232,6 +232,14 @@ button:focus {
 .col-aka {
     margin-left: -51px;
 }
+/* 2020.07.30 paulus: 字段太長時自動 cut 短 */
+.col-aka-wrap {
+    margin-left: -51px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 /*--Akaunting Column Styl Finish--*/
 
 /*--------Table Head Row Margin--------*/
