@@ -94,3 +94,4 @@ _ide_helper.php
 modules/*
 !modules/OfflinePayments
 !modules/PaypalStandard
+!modules/DoubleEntry
