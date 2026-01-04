@@ -90,24 +90,106 @@ Excludes test files, git directories, and other unnecessary files from the packa
 
 ## 🚀 Installation
 
-1. **Upload Module**
+### Method 1: Manual Installation (Recommended for Custom Modules)
 
-   ```bash
-   # Place files in modules/DoubleEntry directory
-   ```
-2. **Enable Module**
+1. **Upload Module Files**
 
+   Upload the `DoubleEntry` folder to your server's `modules/` directory:
+   
    ```bash
-   php artisan module:enable double-entry
+   # Via FTP/SFTP/SSH, upload the entire DoubleEntry folder to:
+   /path/to/akaunting/modules/DoubleEntry
+   
+   # Or via SSH, extract the ZIP file:
+   unzip DoubleEntry.zip -d /path/to/akaunting/modules/
    ```
-3. **Run Migrations**
+
+   **Important**: The folder structure should be:
+   ```
+   modules/
+   └── DoubleEntry/
+       ├── Console/
+       ├── Database/
+       ├── Http/
+       ├── Models/
+       ├── module.json
+       └── ... (all other files)
+   ```
+
+2. **Set Permissions**
+
+   Ensure the web server has read access to the module files:
+   ```bash
+   chmod -R 755 modules/DoubleEntry
+   chown -R www-data:www-data modules/DoubleEntry  # Adjust user/group as needed
+   ```
+
+3. **Install Module**
+
+   Run the installation command (replace `1` with your company ID):
+   ```bash
+   php artisan module:install double-entry 1
+   ```
+
+   To find your company ID:
+   ```bash
+   php artisan tinker
+   >>> \App\Models\Common\Company::pluck('id', 'name')
+   ```
+
+4. **Run Migrations**
 
    ```bash
    php artisan migrate
    ```
-4. **Configure Permissions**
 
-   - Assign permissions to appropriate roles via Akaunting admin panel
+5. **Enable Module** (if not already enabled)
+
+   ```bash
+   php artisan module:enable double-entry 1
+   ```
+
+6. **Configure Permissions**
+
+   - Log in to Akaunting admin panel
+   - Go to **Settings > Roles & Permissions**
+   - Assign the following permissions to appropriate roles:
+     - `read-double-entry-accounts`
+     - `create-double-entry-accounts`
+     - `update-double-entry-accounts`
+     - `delete-double-entry-accounts`
+     - `read-double-entry-journals`
+     - `create-double-entry-journals`
+     - `update-double-entry-journals`
+     - `delete-double-entry-journals`
+     - `read-double-entry-reports`
+
+### Method 2: Via Akaunting Marketplace (If Published)
+
+If this module is published to the Akaunting marketplace:
+
+1. Log in to your Akaunting admin panel
+2. Navigate to **Apps > Browse Apps**
+3. Search for "Double Entry"
+4. Click **Install** and follow the on-screen instructions
+5. The system will automatically:
+   - Download and extract the module
+   - Run migrations
+   - Enable the module
+
+### Verification
+
+After installation, verify the module is active:
+
+```bash
+php artisan module:list
+```
+
+You should see `double-entry` in the list with status `enabled`.
+
+Or check via the admin panel:
+- Navigate to **Apps > My Apps**
+- Look for "Double Entry" in the installed modules list
 
 ---
 
